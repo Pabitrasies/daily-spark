@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Spark — Quote & Idea</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#070914;--card:rgba(255,255,255,.075);--border:rgba(255,255,255,.13);--text:#f8f9ff;--muted:#a9aec3;--accent:#8b7cff;--accent2:#45d6c8}
+body{min-height:100vh;background:radial-gradient(circle at 15% 15%,#20204c 0,transparent 30%),radial-gradient(circle at 85% 80%,#123f4a 0,transparent 30%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;border-radius:50%;filter:blur(2px);opacity:.35;pointer-events:none;z-index:-1}
+body:before{width:280px;height:280px;background:#7966ff;top:-80px;right:8%;animation:float 8s ease-in-out infinite}
+body:after{width:220px;height:220px;background:#2dd4bf;bottom:-80px;left:8%;animation:float 10s ease-in-out infinite reverse}
+@keyframes float{50%{transform:translate(30px,25px) scale(1.08)}}
+header{max-width:1150px;margin:auto;padding:28px 22px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:700;font-size:20px;letter-spacing:.5px}.logo span{color:var(--accent)}
+nav button,.icon-btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:12px;cursor:pointer;transition:.25s}
+nav button:hover,.icon-btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+main{max-width:1050px;margin:25px auto 70px;padding:0 22px}
+.hero{text-align:center;margin:45px auto 38px;animation:rise .8s ease both}
+.eyebrow{text-transform:uppercase;letter-spacing:4px;color:var(--accent2);font-size:12px;font-weight:700;margin-bottom:16px}
+h1{font-family:"Playfair Display",serif;font-size:clamp(44px,8vw,86px);line-height:.98;letter-spacing:-2px}
+.subtitle{color:var(--muted);max-width:600px;margin:20px auto;font-size:17px;line-height:1.7}
+.date{color:#7e849b;font-size:13px;margin-top:15px}
+.grid{display:grid;grid-template-columns:1.25fr .9fr;gap:20px}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.045));border:1px solid var(--border);border-radius:28px;padding:30px;backdrop-filter:blur(18px);box-shadow:0 20px 70px rgba(0,0,0,.22);animation:rise .8s ease both}
+.card:nth-child(2){animation-delay:.12s}
+.label{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--accent2);text-transform:uppercase;margin-bottom:25px}
+.quote{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,46px);line-height:1.2}
+.author{color:var(--muted);margin-top:22px}
+.idea{font-size:23px;line-height:1.45;font-weight:600}
+.action{margin-top:22px;color:var(--muted);line-height:1.7}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}
+.primary{background:linear-gradient(135deg,var(--accent),#b36cff);border:0;color:white;padding:13px 18px;border-radius:13px;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(139,124,255,.25);transition:.25s}
+.primary:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(139,124,255,.4)}
+.secondary{background:rgba(255,255,255,.06);border:1px solid var(--border);color:white;padding:13px 18px;border-radius:13px;cursor:pointer}
+.streak{text-align:center;margin:28px 0;padding:20px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.streak b{color:#ffd76a}.mini{font-size:13px;color:var(--muted);margin-top:5px}
+footer{text-align:center;color:#686f87;font-size:13px;padding:20px}
+.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,30px);background:#fff;color:#111;padding:12px 18px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:10}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media(max-width:760px){header{padding-top:20px}.grid{grid-template-columns:1fr}.hero{margin-top:30px}h1{letter-spacing:-1px}.card{padding:23px}.quote{font-size:32px}}
+
+.story-section{margin-top:22px;animation:rise .8s ease both}
+.story-header{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:18px}
+.story-title{font-family:"Playfair Display",serif;font-size:32px}
+.story-subtitle{color:var(--muted);font-size:14px;margin-top:5px}
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.story-card{background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid var(--border);border-radius:22px;padding:22px;transition:.3s;position:relative;overflow:hidden}
+.story-card:hover{transform:translateY(-6px);border-color:rgba(139,124,255,.55);box-shadow:0 18px 45px rgba(0,0,0,.2)}
+.story-icon{font-size:34px;margin-bottom:16px}
+.story-card h3{font-family:"Playfair Display",serif;font-size:22px;margin-bottom:9px}
+.story-card p{color:var(--muted);line-height:1.6;font-size:14px;min-height:67px}
+.price-row{display:flex;align-items:center;justify-content:space-between;margin-top:19px}
+.price{font-size:21px;font-weight:700}.buy{background:linear-gradient(135deg,var(--accent),#b36cff);border:0;color:white;padding:10px 14px;border-radius:11px;font-weight:700;cursor:pointer}
+.payment-note{text-align:center;color:#747b91;font-size:12px;margin-top:15px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:20;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal-box{max-width:430px;width:100%;background:#111426;border:1px solid var(--border);border-radius:24px;padding:28px;box-shadow:0 25px 80px rgba(0,0,0,.45);animation:rise .3s ease}
+.modal-box h2{font-family:"Playfair Display",serif;font-size:28px;margin-bottom:9px}.modal-box p{color:#a9aec3;line-height:1.6}
+.close{float:right;background:rgba(255,255,255,.08);border:0;color:white;border-radius:9px;padding:7px 10px;cursor:pointer}
+.gateway{margin-top:20px;width:100%;padding:14px;border:0;border-radius:12px;background:linear-gradient(135deg,#8b7cff,#b36cff);color:#fff;font-weight:700;font-size:15px;cursor:pointer}
+.gateway:hover{transform:translateY(-2px)}
+@media(max-width:800px){.story-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.story-grid{grid-template-columns:1fr}.story-header{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">DAILY <span>SPARK</span> ✦</div>
+  <nav><button onclick="toggleTheme()">◐ Theme</button></nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="eyebrow">Your daily dose of inspiration</div>
+  <h1>Think. Create.<br>Become.</h1>
+  <p class="subtitle">One powerful thought. One useful idea. One small action — every single day.</p>
+  <div class="date" id="date"></div>
+</section>
+
+<section class="grid" id="content">
+  <article class="card">
+    <div class="label">✦ Quote of the Day</div>
+    <div class="quote" id="quote"></div>
+    <div class="author" id="author"></div>
+    <div class="actions">
+      <button class="primary" onclick="newSpark()">✦ New Spark</button>
+      <button class="secondary" onclick="shareSpark()">↗ Share</button>
+      <button class="icon-btn" onclick="saveSpark()">♡ Save</button>
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="label">💡 Idea of the Day</div>
+    <div class="idea" id="idea"></div>
+    <div class="action"><b>Today's action:</b><br><span id="action"></span></div>
+  </article>
+</section>
+
+
+<section class="story-section">
+  <div class="story-header">
+    <div>
+      <div class="eyebrow">Pabitra's Story Library</div>
+      <div class="story-title">Stories worth reading.</div>
+      <div class="story-subtitle">Buy a story you connect with and unlock the full experience.</div>
+    </div>
+  </div>
+
+  <div class="story-grid">
+    <article class="story-card">
+      <div class="story-icon">🌅</div>
+      <h3>The Last Sunrise</h3>
+      <p>A short motivational story about starting again when everything seems finished.</p>
+      <div class="price-row"><span class="price">₹49</span><button class="buy" onclick="buyStory('The Last Sunrise',49)">Buy Story</button></div>
+    </article>
+    <article class="story-card">
+      <div class="story-icon">🔥</div>
+      <h3>The Silent Warrior</h3>
+      <p>A story about patience, discipline and the strength nobody sees.</p>
+      <div class="price-row"><span class="price">₹49</span><button class="buy" onclick="buyStory('The Silent Warrior',49)">Buy Story</button></div>
+    </article>
+    <article class="story-card">
+      <div class="story-icon">✨</div>
+      <h3>One More Step</h3>
+      <p>When the goal feels too far away, one small step can change everything.</p>
+      <div class="price-row"><span class="price">₹49</span><button class="buy" onclick="buyStory('One More Step',49)">Buy Story</button></div>
+    </article>
+  </div>
+  <div class="payment-note">Secure payment checkout · UPI · Cards · Net Banking · Razorpay integration ready</div>
+</section>
+
+<div class="modal" id="paymentModal">
+  <div class="modal-box">
+    <button class="close" onclick="closePayment()">✕</button>
+    <div class="eyebrow">Story Purchase</div>
+    <h2 id="modalStory">Your Story</h2>
+    <p>You selected this story for <strong id="modalPrice">₹49</strong>. Connect your Razorpay account to activate the live payment checkout.</p>
+    <button class="gateway" onclick="showToast('Razorpay checkout will be connected after adding your merchant keys.')">💳 Continue to Payment</button>
+  </div>
+</div>
+
+<div class="streak">
+  🔥 <b id="streak">1</b> day inspiration streak
+  <div class="mini">Come back tomorrow for a new spark.</div>
+</div>
+</main>
+
+<footer>Made for people who want to grow every day · DAILY SPARK<br><br><strong>Owner: Pabitra Parida</strong><br><br>
+<a href="https://www.instagram.com/pabitr_parida/" target="_blank" rel="noopener"
+style="display:inline-block;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;
+padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700">
+📸 Instagram · @pabitr_parida
+</a><br><br>
+<a href="https://www.instagram.com/pabitr_parida/" target="_blank" rel="noopener"
+style="color:inherit">https://www.instagram.com/pabitr_parida/</a></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const sparks=[
+ {q:"Small steps every day create extraordinary results.",a:"Daily Spark",i:"Choose one skill that can improve your future and spend just 20 minutes learning it today.",x:"Put your phone away and learn for 20 focused minutes."},
+ {q:"Your future is built by what you do today.",a:"Daily Spark",i:"Turn one problem around you into a possible business or project idea.",x:"Write down 3 problems you notice in daily life."},
+ {q:"Discipline turns ordinary effort into uncommon results.",a:"Daily Spark",i:"Create a tiny routine that you can repeat even on your busiest day.",x:"Pick one habit and do it for 10 minutes."},
+ {q:"Do not wait for motivation. Start, and motivation often follows.",a:"Daily Spark",i:"Make a rough first version instead of waiting for a perfect plan.",x:"Start one task you have been postponing."},
+ {q:"A year from now, you will wish you had started today.",a:"Daily Spark",i:"Build something small that proves what you can do.",x:"Spend 30 minutes creating instead of consuming."},
+ {q:"Clarity comes from action, not endless thinking.",a:"Daily Spark",i:"If you are confused about a goal, test the smallest possible version of it.",x:"Take one measurable step toward your goal."}
+];
+let index=new Date().getDate()%sparks.length;
+let streak=Number(localStorage.getItem("sparkStreak")||1);
+document.getElementById("streak").textContent=streak;
+document.getElementById("date").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+
+function render(){
+ const s=sparks[index];
+ document.getElementById("quote").textContent="“"+s.q+"”";
+ document.getElementById("author").textContent="— "+s.a;
+ document.getElementById("idea").textContent=s.i;
+ document.getElementById("action").textContent=s.x;
+ const c=document.getElementById("content"); c.style.animation="none"; void c.offsetWidth; c.style.animation="rise .55s ease";
+}
+function newSpark(){index=(index+1)%sparks.length;
+function buyStory(name,price){
+ document.getElementById("modalStory").textContent=name;
+ document.getElementById("modalPrice").textContent="₹"+price;
+ document.getElementById("paymentModal").classList.add("show");
+}
+function closePayment(){document.getElementById("paymentModal").classList.remove("show")}
+document.getElementById("paymentModal").addEventListener("click",function(e){if(e.target===this)closePayment()});
+
+render();showToast("✨ New spark unlocked");}
+function saveSpark(){localStorage.setItem("savedSpark",JSON.stringify(sparks[index]));showToast("♡ Saved on this device");}
+async function shareSpark(){
+ const s=sparks[index], text=`${s.q}\n\n💡 ${s.i}\n\n— DAILY SPARK`;
+ if(navigator.share){try{await navigator.share({title:"Daily Spark",text})}catch(e){}}
+ else{await navigator.clipboard.writeText(text);showToast("↗ Copied to clipboard");}
+}
+function toggleTheme(){
+ document.body.classList.toggle("light");
+ if(document.body.classList.contains("light")){
+   document.documentElement.style.setProperty("--bg","#eef0f8");document.documentElement.style.setProperty("--text","#171827");document.documentElement.style.setProperty("--muted","#62677b");
+   showToast("☀ Light mode");
+ }else{
+   document.documentElement.style.setProperty("--bg","#070914");document.documentElement.style.setProperty("--text","#f8f9ff");document.documentElement.style.setProperty("--muted","#a9aec3");
+   showToast("🌙 Dark mode");
+ }
+}
+function showToast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)}
+render();
+</script>
+</body>
+</html>
